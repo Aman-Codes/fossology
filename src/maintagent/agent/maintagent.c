@@ -98,9 +98,10 @@ int main(int argc, char **argv)
   int reIndexAllTablesExe = 0;
   int removeOrphanedRowsExe = 0;
   int removeOrphanedLogs = 0;
+  int removeExpiredTokens = 0;
 
   /* command line options */
-  while ((cmdopt = getopt(argc, argv, "aAc:DEFghiILNpPRTUvVZ")) != -1)
+  while ((cmdopt = getopt(argc, argv, "aAc:DEFghiILNpPRtTUvVZ")) != -1)
   {
     switch (cmdopt)
     {
@@ -139,6 +140,11 @@ int main(int argc, char **argv)
         {
           removeOrphanedLogFiles();
           removeOrphanedLogs = 1;
+        }
+        if (removeExpiredTokens == 0)
+        {
+          removeExpiredTokens();
+          removeExpiredTokens = 1;
         }
         break;
       case 'A': /* All operations */
@@ -197,6 +203,11 @@ int main(int argc, char **argv)
           removeOrphanedLogFiles();
           removeOrphanedLogs = 1;
         }
+        if (removeExpiredTokens == 0)
+        {
+          removeExpiredTokens();
+          removeExpiredTokens = 1;
+        }
         break;
       case 'D': /* Vac/Analyze (slow) */
         if (vacAnalyzeExe == 0)
@@ -240,6 +251,13 @@ int main(int argc, char **argv)
         {
           removeUploads();
           removeUploadsExe = 1;
+        }
+        break;
+      case 't': /* Remove expired personal access token */
+        if (removeExpiredTokens == 0)
+        {
+          removeExpiredTokens();
+          removeExpiredTokens = 1;
         }
         break;
       case 'T': /* Remove orphaned temp tables */
