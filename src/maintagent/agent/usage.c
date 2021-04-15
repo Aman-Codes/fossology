@@ -30,8 +30,8 @@
 FUNCTION void usage(char *name)
 {
   printf("Usage: %s [options]\n", name);
-  printf("  -a   :: Run all non slow maintenance operations.\n");
-  printf("  -A   :: Run all maintenance operations.\n");
+  printf("  -a # :: Run all non slow maintenance operations where # is the retention period of expired tokens.\n");
+  printf("  -A # :: Run all maintenance operations where # is the retention period of expired tokens.\n");
   printf("  -D   :: Vacuum Analyze the database.\n");
   printf("  -F   :: Validate folder contents.\n");
   printf("  -g   :: Delete orphan gold files.\n");
@@ -41,6 +41,7 @@ FUNCTION void usage(char *name)
   printf("  -p   :: Verify file permissions (report only).\n");
   printf("  -P   :: Verify and fix file permissions.\n");
   printf("  -R   :: Remove uploads with no pfiles.\n");
+  printf("  -t # :: Remove personal access tokens expired # days ago.\n");
   printf("  -T   :: Remove orphaned temp tables.\n");
   printf("  -U   :: Process expired uploads (slow).\n");
   printf("  -Z   :: Remove orphaned files from the repository (slow).\n");
