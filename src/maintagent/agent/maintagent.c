@@ -98,9 +98,11 @@ int main(int argc, char **argv)
   int reIndexAllTablesExe = 0;
   int removeOrphanedRowsExe = 0;
   int removeOrphanedLogs = 0;
+  int removeExpiredTokensExe = 0;
+  int tokenRetentionPeriod = 30;
 
   /* command line options */
-  while ((cmdopt = getopt(argc, argv, "aAc:DEFghiILNpPRTUvVZ")) != -1)
+  while ((cmdopt = getopt(argc, argv, "a:A:c:DEFghiILNpPRst:TUvVZ")) != -1)
   {
     switch (cmdopt)
     {
@@ -139,6 +141,12 @@ int main(int argc, char **argv)
         {
           removeOrphanedLogFiles();
           removeOrphanedLogs = 1;
+        }
+        if (removeExpiredTokensExe == 0)
+        {
+          tokenRetentionPeriod = atol(optarg);
+          removeExpiredTokens(tokenRetentionPeriod);
+          removeExpiredTokensExe = 1;
         }
         break;
       case 'A': /* All operations */
@@ -197,6 +205,12 @@ int main(int argc, char **argv)
           removeOrphanedLogFiles();
           removeOrphanedLogs = 1;
         }
+        if (removeExpiredTokensExe == 0)
+        {
+          tokenRetentionPeriod = atol(optarg);
+          removeExpiredTokens(tokenRetentionPeriod);
+          removeExpiredTokensExe = 1;
+        }
         break;
       case 'D': /* Vac/Analyze (slow) */
         if (vacAnalyzeExe == 0)
@@ -240,6 +254,14 @@ int main(int argc, char **argv)
         {
           removeUploads();
           removeUploadsExe = 1;
+        }
+        break;
+      case 't': /* Remove expired personal access token */
+        if (removeExpiredTokensExe == 0)
+        {
+          tokenRetentionPeriod = atol(optarg);
+          removeExpiredTokens(tokenRetentionPeriod);
+          removeExpiredTokensExe = 1;
         }
         break;
       case 'T': /* Remove orphaned temp tables */
