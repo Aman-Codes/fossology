@@ -536,7 +536,7 @@ FUNCTION void removeExpiredTokens()
   char *countTuples;
   long startTime, endTime;
 
-  char *SQL = "DELETE FROM personal_access_tokens WHERE active = 'f' ";
+  char *SQL = "DELETE FROM personal_access_tokens WHERE active = 'f'";
 
   startTime = (long)time(0);
 

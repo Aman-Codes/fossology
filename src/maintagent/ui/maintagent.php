@@ -93,6 +93,7 @@ class maintagent extends FO_Plugin {
               //       "P"=>_("Verify and fix file permissions."),
                      "R"=>_("Remove uploads with no pfiles."),
                      "T"=>_("Remove orphaned temp tables."),
+                     "t"=>_("Remove expired personal access tokens."),
                      "D"=>_("Vacuum Analyze the database."),
               //       "U"=>_("Process expired uploads (slow)."),
               //       "Z"=>_("Remove orphaned files from the repository (slow)."),
@@ -117,7 +118,7 @@ class maintagent extends FO_Plugin {
     $V.= "<p>";
     $V.= _("More information about these operations can be found ");
     $text = _("here.");
-    $V.= "<a href=http://www.fossology.org/projects/fossology/wiki/Maintagent> $text </a>";
+    $V.= "<a href=https://github.com/fossology/fossology/wiki/Maintenance-Agent> $text </a>";
 
     $V.= "<input type=hidden name=queue value=true>";
 
